@@ -1,0 +1,32 @@
+{
+	"private": true,
+	"workspaces": [
+		"services/*",
+		"shared/*"
+	],
+	"devDependencies": {
+		"@types/jest": "^25.1.2",
+		"@types/node": "^13.7.0",
+		"@typescript-eslint/eslint-plugin": "^2.19.0",
+		"@typescript-eslint/parser": "^2.19.0",
+		"eslint": "^6.8.0",
+		"eslint-config-airbnb-base": "^14.0.0",
+		"eslint-plugin-import": "^2.20.1",
+		"jest": "^25.1.0",
+		"ts-jest": "^25.2.0",
+		"ts-node": "^8.6.2",
+		"typescript": "^3.7.5"
+	},
+	"scripts": {
+		"build": "yarn run typescript:build",
+		"watch": "yarn run typescript:watch",
+		"clean": "yarn run typescript:clean",
+		"test": "yarn run test:eslint && yarn run test:jest",
+		"test:jest": "jest --config jest.config.json --no-cache",
+		"test:eslint": "eslint --ignore-path .gitignore {services,shared}/*/src/**/*.ts",
+		"typescript:build": "tsc --build ./tsconfig.project.json",
+		"typescript:watch": "yarn run typescript:build --watch",
+		"typescript:clean": "rm -rf ./{services,shared}/*/{lib,*.tsbuildinfo}",
+		"update:tsconfig": "ts-node scripts/update-package-tsconfig.ts"
+	}
+}
